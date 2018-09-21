@@ -272,8 +272,16 @@ export class DateRangeSelector extends Component {
 		);
 	};
 
-	render() {
+	handleButtonClick = () => {
 		const { isVisible, onButtonClick } = this.props;
+		if ( isVisible ) {
+			this.handleClose();
+		}
+		onButtonClick();
+	};
+
+	render() {
+		const { isVisible } = this.props;
 		const from = this.getFromDate();
 		const to = this.getToDate();
 
@@ -288,7 +296,7 @@ export class DateRangeSelector extends Component {
 					className={ buttonClass }
 					compact
 					borderless
-					onClick={ onButtonClick }
+					onClick={ this.handleButtonClick }
 					ref={ this.dateRangeButton }
 				>
 					{ this.getFromatedDate( from, to ) }

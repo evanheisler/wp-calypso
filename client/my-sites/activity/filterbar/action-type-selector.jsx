@@ -188,8 +188,16 @@ export class ActionTypeSelector extends Component {
 
 	isSelected = key => this.getSelectedCheckboxes().includes( key );
 
+	handleButtonClick = () => {
+		const { isVisible, onButtonClick } = this.props;
+		if ( isVisible ) {
+			this.handleClose();
+		}
+		onButtonClick();
+	};
+
 	render() {
-		const { translate, isVisible, onButtonClick } = this.props;
+		const { translate, isVisible } = this.props;
 		const selectedCheckboxes = this.getSelectedCheckboxes();
 		const hasSelectedCheckboxes = ! isEmpty( selectedCheckboxes );
 
@@ -205,7 +213,7 @@ export class ActionTypeSelector extends Component {
 					className={ buttonClass }
 					compact
 					borderless
-					onClick={ onButtonClick }
+					onClick={ this.handleButtonClick }
 					ref={ this.activityTypeButton }
 				>
 					{ translate( 'Activity Type' ) }

@@ -25,6 +25,7 @@ export class Filterbar extends Component {
 			showActivityDates: ! this.state.showActivityDates,
 			showActivityTypes: false,
 		} );
+		this.scrollIntoView();
 	};
 
 	closeDateRangeSelector = () => {
@@ -36,6 +37,7 @@ export class Filterbar extends Component {
 			showActivityTypes: ! this.state.showActivityTypes,
 			showActivityDates: false,
 		} );
+		this.scrollIntoView();
 	};
 
 	closeActivityTypes = () => {
@@ -58,10 +60,18 @@ export class Filterbar extends Component {
 		}
 	};
 
+	scrollIntoView = () => {
+		const filterbar = document.getElementById( 'filterbar' );
+		if ( filterbar ) {
+			filterbar.scrollIntoView( { behavior: 'smooth', block: 'start', inline: 'nearest' } );
+			window.scrollBy( 0, -50 );
+		}
+	};
+
 	render() {
 		const { translate, siteId, filter } = this.props;
 		return (
-			<div className="filterbar">
+			<div className="filterbar" id="filterbar">
 				<div className="filterbar__wrap card">
 					<div className="filterbar__icon-navigation">
 						<Gridicon icon="filter" className="filterbar__open-icon" />

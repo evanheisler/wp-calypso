@@ -13,6 +13,7 @@ import Button from 'components/button';
 import DateRangeSelector from './date-range-selector';
 import ActionTypeSelector from './action-type-selector';
 import { updateFilter } from 'state/activity-log/actions';
+import { isWithinBreakpoint } from 'lib/viewport';
 
 export class Filterbar extends Component {
 	state = {
@@ -61,6 +62,10 @@ export class Filterbar extends Component {
 	};
 
 	scrollIntoView = () => {
+		if ( isWithinBreakpoint( '>660px' ) ) {
+			//  scroll into view only happends on mobile
+			return true;
+		}
 		const filterbar = document.getElementById( 'filterbar' );
 		if ( filterbar ) {
 			filterbar.scrollIntoView( { behavior: 'smooth', block: 'start', inline: 'nearest' } );
